@@ -12,6 +12,5 @@
     "dotenv": "^16.0.0",
     "mongoose": "^6.3.0"
   },
-  "devDependencies": {},
   "description": ""
 }

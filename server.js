@@ -1,9 +1,19 @@
 const http = require('http');
 const Post = require('./models/movie');
+const dotenv = require ('dotenv');
 const mongoose = require('mongoose');
 
+dotenv.config({path:"./config.env"});
+
+// console.log(process.env.PORT);
+const DB = process.env.DATABASE.replace(
+    '<password>',
+    process.env.DATABASE_PASSWORD
+)
+
+
 //連接資料庫
-mongoose.connect("mongodb://localhost:27017/movieReview")
+mongoose.connect(DB)
     .then(() => {
         console.log('資料庫連接成功')
     })
@@ -149,4 +159,4 @@ const requestListener = async (req, res) => {
     }
 }
 const server = http.createServer(requestListener);
-server.listen(3000);
+server.listen(process.env.PORT);
