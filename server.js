@@ -53,23 +53,53 @@ mongoose.connect("mongodb://localhost:27017/movieReview")
 
 
 
-// schema 結束
 const requestListener = async (req, res) => {
+    let body = "";
+    req.on('data', chunk => {
+        body += chunk;
+    })
     const headers = {
         'Access-Control-Allow-Headers': 'Content-Type, Authorization, Content-Length, X-Requested-With',
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'PATCH, POST, GET,OPTIONS,DELETE',
         'Content-Type': 'application/json'
     }
-    if(req.url=='/posts' && req.method == 'GET'){
+    if (req.url == '/posts' && req.method == 'GET') {
         const posts = await Post.find();
-        res.writeHead(200,headers);
+        res.writeHead(200, headers);
         res.write(JSON.stringify({
-            "status":"success",
+            "status": "success",
             posts
         }))
+    } else if (req.url = '/posts' && req.method == 'POST') {
+        req.on('end', async () => {
+            try {
+                const data = JSON.parse(body);
+                const newPost = await Post.create(
+                    {
+                        movie: data.movie,
+                        name: data.name,
+                        content: data.content,
+                        likes: data.likes
+                    }
+                )
+                res.writeHead(200, headers);
+                res.write(JSON.stringify({
+                    "status": "success",
+                    posts: newPost
+                }))
+                res.end()
+            } catch (error) {
+                res.writeHead(400, headers);
+                res.write(JSON.stringify({
+                    "status": "false",
+                    "message": "欄位資訊有誤!",
+                    "error": error
+                }))
+                res.end()
+            }
+        })
     }
-    res.end();
 }
 const server = http.createServer(requestListener);
 server.listen(3000);
