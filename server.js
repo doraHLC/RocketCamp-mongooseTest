@@ -77,6 +77,7 @@ const requestListener = async (req, res) => {
             "status": "success",
             posts
         }))
+        res.end()
     } else if (req.url = '/posts' && req.method == 'POST') {
         req.on('end', async () => {
             try {
