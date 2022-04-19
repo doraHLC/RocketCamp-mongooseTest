@@ -56,10 +56,27 @@ mongoose.connect("mongodb://localhost:27017/movieReview")
 //         console.log(error.errors)
 //     })
 
+
+
 //刪除單筆 findByIdAndDelete()
 // Post.findByIdAndDelete("625e589399b9743e20364c38")
 //     .then(()=>{
 //         console.log("刪除成功")
+//     })
+
+
+
+//更新單筆 findByIdAndUpdate()
+// Post.findByIdAndUpdate("625e5adf463015740b81f18e", {
+
+//     "movie": "蝙蝠俠",
+//     "name": "Robert Pattinson",
+//     "content": "布魯斯韋恩雖然是高譚市首富家族的繼承者，性格卻非常孤僻，同時在夜晚化身為蝙蝠俠打擊罪犯。布魯斯韋恩剛化身為蝙蝠俠第二年，年輕憂鬱、全身散發虛無飄渺的氣息，常常潛伏在高譚市的街頭，逐漸建立起復仇使者的形象，不僅在罪犯腦中植入恐懼的種子，也在高譚市民心中建立了復仇使者的形象，更成為黑白兩道最常聚集的夜總會老闆企鵝人難以擺脫的噩夢。在各類罪犯卻仍四處橫行，其中最大的敵人就是用一連串的謎團犯下謀殺案的謎語人。當謎語人留下新的謎題，設下陷阱殺害高譚市的菁英份子後，蝙蝠俠循著神祕線索，並與貓女聯手為高譚市伸張正義。",
+//     "likes": 999
+
+// })
+//     .then(() => {
+//         console.log("更新成功")
 //     })
 
 
