@@ -42,6 +42,12 @@ mongoose.connect("mongodb://localhost:27017/movieReview")
 //         name: 'Jonas Poher Rasmussen',
 //         content: '從喀布爾到哥本哈根，從幼年到成人，我穿越五千公里，願把人生交給你。《漂浪人生》為巧妙結合動畫與紀實手法拍攝而成的紀錄片，電影講述導演摯友的真實人生故事，一個身心漂浪多年的男人努力尋找家的真正定義。阿敏在與未婚夫結婚的前夕，娓娓道來20多年前的他，如何從阿富汗逃離到丹麥的不思議旅程，以及曾身為難民兒童令人心碎的悲慘記憶，而說出這個保守了20年的秘密，卻恐將危及他現在的人生⋯⋯。',
 //         likes: 330
+//     },
+//     {
+//         movie: '尋子風暴',
+//         name: 'Claire Foy',
+//         content: '在開車前往蘇格蘭高地的路上，愛德蒙（詹姆斯麥艾維 飾）接到前妻瓊安（克萊兒芙伊 飾）打來的電話，她哭著說他們七歲的兒子在露營場失蹤了。這對父母很快理解到這是一起綁架事件，並陷入絕望之中……。',
+//         likes: 1000
 //     }
 // ).then(() => {
 //     console.log('新增影評資料成功')
@@ -99,115 +105,25 @@ const requestListener = async (req, res) => {
                 res.end()
             }
         })
+    } else if (req.url = '/posts' && req.method == 'DELETE') {
+        const posts = await Post.deleteMany({})
+        res.writeHead(200, headers);
+        res.write(JSON.stringify({
+            "status": "success",
+            posts: []
+        }))
+        res.end()
+    } else if (req.method == "OPTIONS") {
+        res.writeHead(200, headers);
+        res.end();
+    } else {
+        res.writeHead(404, headers);
+        res.write(JSON.stringify({
+            "status": "false",
+            "message": "無此網站路由"
+        }));
+        res.end();
     }
 }
 const server = http.createServer(requestListener);
 server.listen(3000);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const http = require("http");
-// const mongoose = require('mongoose');
-
-// // 連接資料庫
-// mongoose.connect('mongodb://localhost:27017/hotel')
-//     .then(() => {
-//         console.log('資料庫連線成功')
-//     })
-//     .catch((error) => {
-//         console.log(error);
-//     });
-
-// const roomSchema = new mongoose.Schema(
-//     {
-//         name: String,
-//         price: {
-//             type: Number,
-//             required: [true, "價格必填"]
-//         },
-//         rating: Number
-//     },
-//     {
-//         versionKey: false
-//     }
-// )
-
-//作業 分出model
-
-//資料處理model
-//非同步事件
-
-// const postSchema = new mongoose.Schema(
-//     {
-//       content: {
-//         type: String,
-//         required: [true, 'Content 未填寫']
-//       },
-//       image: {
-//         type:String,
-//         default:""
-//       },
-//       createdAt: {
-//         type: Date,
-//         default: Date.now(),
-//         select: false
-//       },
-//       name: {
-//           type: String,
-//           required: [true, '貼文姓名未填寫']
-//       },
-//       likes: {
-//           type:Number,
-//           default:0
-//         }
-//     }
-// );
-// const Post = mongoose.model('Post', postSchema);
-
-//非同步事件
-// const init = async()=>{
-//         const AllPost =  await Post.find();    或者 post.find().then(res=>{console.log(res)}) //太繁雜
-//         console.log(AllPost)
-//     }
-// init();
-
-// const Room = mongoose.model('Room', roomSchema);
-
-// const testRoom = new Room(
-//     {
-//         name: "KK總統套房",
-//         price: 2000,
-//         rating: 4.5,
-//     }
-// );
-
-// testRoom.save()
-//     .then(() => {
-//         console.log("新增資料成功")
-//     })
-//     .catch(error => {
-//         console.log(error)
-//     })
-
-
-// const requestListener = (req, res) => {
-//     console.log(req.url);
-//     res.end();
-// }
-
-// const server = http.createServer(requestListener);
-// server.listen(3000);
