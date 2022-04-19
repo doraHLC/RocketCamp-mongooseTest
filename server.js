@@ -56,6 +56,11 @@ mongoose.connect("mongodb://localhost:27017/movieReview")
 //         console.log(error.errors)
 //     })
 
+//刪除單筆 findByIdAndDelete()
+// Post.findByIdAndDelete("625e589399b9743e20364c38")
+//     .then(()=>{
+//         console.log("刪除成功")
+//     })
 
 
 
