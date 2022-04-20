@@ -24,5 +24,6 @@
     "url": "https://github.com/doraHLC/mongooseTest/issues"
   },
   "homepage": "https://github.com/doraHLC/mongooseTest#readme",
+  "devDependencies": {},
   "description": ""
 }
